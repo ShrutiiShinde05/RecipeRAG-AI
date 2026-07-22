@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Recipe Agent — IBM watsonx</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #f4f5f7;
+      --surface:   #ffffff;
+      --border:    #e2e4e9;
+      --text:      #111318;
+      --muted:     #5c6270;
+      --accent:    #0f62fe;
+      --accent-lt: #eaf1ff;
+      --green:     #24a148;
+      --green-lt:  #defbe6;
+      --orange:    #d14009;
+      --orange-lt: #fff1e8;
+      --purple:    #6929c4;
+      --purple-lt: #f3eeff;
+      --radius:    12px;
+    }
+
+    html, body { height: 100%; }
+
+    body {
+      font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* ── TOP NAV ── */
+    nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-logo {
+      width: 34px;
+      height: 34px;
+      background: var(--accent);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .nav-logo svg { display: block; }
+
+    .nav-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .nav-name span {
+      font-weight: 400;
+      color: var(--muted);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .badge {
+      font-size: 11px;
+      font-weight: 600;
+      border-radius: 20px;
+      padding: 3px 10px;
+      letter-spacing: 0.01em;
+    }
+
+    .badge-blue  { background: var(--accent-lt);  color: var(--accent);  border: 1px solid #b8d0ff; }
+    .badge-green { background: var(--green-lt);   color: var(--green);   border: 1px solid #a2deb3; }
+
+    .nav-powered {
+      font-size: 11px;
+      color: var(--muted);
+      border-left: 1px solid var(--border);
+      padding-left: 12px;
+    }
+
+    /* ── PAGE WRAPPER ── */
+    .page {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 28px 28px;
+      gap: 24px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 40px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .hero-text { flex: 1; }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .hero h1 {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.25;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero p {
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 460px;
+      line-height: 1.7;
+    }
+
+    .hero-visual {
+      flex-shrink: 0;
+      width: 96px;
+      height: 96px;
+      background: var(--accent-lt);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-visual svg { display: block; }
+
+    /* ── CARDS ROW ── */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    @media (max-width: 760px) {
+      .cards { grid-template-columns: repeat(2, 1fr); }
+      .hero   { flex-direction: column; padding: 24px; }
+      .hero-visual { display: none; }
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 16px 16px;
+    }
+
+    .card-dot {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+
+    .card-dot svg { display: block; }
+
+    .card h3 {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+
+    .card p {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* ── CHIPS ── */
+    .chips-row {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chips-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--muted);
+      margin-right: 4px;
+      white-space: nowrap;
+    }
+
+    .chip {
+      font-size: 12px;
+      color: var(--accent);
+      background: var(--accent-lt);
+      border: 1px solid #b8d0ff;
+      border-radius: 20px;
+      padding: 4px 12px;
+      cursor: default;
+      white-space: nowrap;
+    }
+
+    /* ── CHAT PANEL ── */
+    .chat-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chat-panel-header {
+      background: var(--accent);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .chat-panel-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .chat-panel-title .dot {
+      width: 8px;
+      height: 8px;
+      background: #42be65;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .chat-panel-meta {
+      font-size: 11px;
+      color: rgba(255,255,255,0.7);
+    }
+
+    #root {
+      flex: 1;
+      min-height: 500px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      font-size: 11px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      padding: 14px 28px;
+      background: var(--surface);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-brand">
+      <div class="nav-logo">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 2C5.58 2 2 5.58 2 10s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm-.75 4h1.5v5.25l3.25 1.88-.75 1.3-3.75-2.18A.75.75 0 0 1 9.25 11.5V6z" fill="#fff"/>
+        </svg>
+      </div>
+      <div class="nav-name">Recipe Agent <span>/ IBM watsonx Orchestrate</span></div>
+    </div>
+    <div class="nav-right">
+      <span class="badge badge-green">● Live</span>
+      <span class="badge badge-blue">AI Assistant</span>
+      <span class="nav-powered">au-syd region</span>
+    </div>
+  </nav>
+
+  <!-- PAGE -->
+  <div class="page">
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-text">
+        <div class="hero-eyebrow">Powered by IBM watsonx Orchestrate</div>
+        <h1>Your Personal<br/><em>Recipe Assistant</em></h1>
+        <p>Ask me anything — quick weeknight dinners, elaborate feasts, dietary needs, or a full week of meal planning. I'll guide you from ingredients to the finished plate.</p>
+      </div>
+      <div class="hero-visual">
+        <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M26 8C16.06 8 8 16.06 8 26s8.06 18 18 18 18-8.06 18-18S35.94 8 26 8zm-1 8h2v11.17l7.41 4.29-1 1.73-8-4.63A1 1 0 0 1 25 27.5V16z" fill="#0f62fe"/>
+          <circle cx="26" cy="26" r="17" stroke="#0f62fe" stroke-width="1.5" fill="none" stroke-dasharray="3 3"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- FEATURE CARDS -->
+    <div class="cards">
+      <div class="card">
+        <div class="card-dot" style="background:#eaf1ff">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1.5A7.5 7.5 0 1 0 9 16.5 7.5 7.5 0 0 0 9 1.5zM8.25 5.25h1.5v4.94l3 1.73-.75 1.3-3.38-1.95A.75.75 0 0 1 8.25 10.5v-5.25z" fill="#0f62fe"/></svg>
+        </div>
+        <h3>Instant Recipes</h3>
+        <p>Step-by-step instructions for any dish in seconds.</p>
+      </div>
+      <div class="card">
+        <div class="card-dot" style="background:#defbe6">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M5 2v1H3v1h2v1H4v1h1v1H3v1h2v1H4v1h1v6h1v-2h2v2h1v-2h2v2h1V10h1V9h-1V8h1V7h-1V6h1V5h-1V4h1V3h-2V2h-1v1H7V2H5zM7 4h4v1H7V4zm0 2h4v1H7V6zm0 2h4v1H7V8zm0 2h4v1H7v-1z" fill="#24a148"/></svg>
+        </div>
+        <h3>Ingredient Lookup</h3>
+        <p>Recipes built around what's already in your kitchen.</p>
+      </div>
+      <div class="card">
+        <div class="card-dot" style="background:#f3eeff">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 3h12v12H3V3zm1 1v10h10V4H4zm2 2h6v1H6V6zm0 2h6v1H6V8zm0 2h4v1H6v-1z" fill="#6929c4"/></svg>
+        </div>
+        <h3>Meal Planning</h3>
+        <p>Balanced weekly plans tailored to your preferences.</p>
+      </div>
+      <div class="card">
+        <div class="card-dot" style="background:#fff1e8">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1.5a7.5 7.5 0 1 0 0 15 7.5 7.5 0 0 0 0-15zm-.75 3.75h1.5V9h2.25v1.5H8.25V5.25z" fill="#d14009"/></svg>
+        </div>
+        <h3>Dietary Filters</h3>
+        <p>Vegan, gluten-free, keto, low-carb and more.</p>
+      </div>
+    </div>
+
+    <!-- SUGGESTION CHIPS -->
+    <div class="chips-row">
+      <span class="chips-label">Try asking</span>
+      <span class="chip">What can I make with chicken &amp; rice?</span>
+      <span class="chip">Give me a 30-min pasta recipe</span>
+      <span class="chip">Suggest a vegan breakfast</span>
+      <span class="chip">How do I make sourdough bread?</span>
+      <span class="chip">3-day meal plan for 2 people</span>
+      <span class="chip">High-protein dinner ideas</span>
+    </div>
+
+    <!-- CHAT PANEL -->
+    <div class="chat-panel">
+      <div class="chat-panel-header">
+        <div class="chat-panel-title">
+          <span class="dot"></span>
+          Recipe Agent — Ready to chat
+        </div>
+        <div class="chat-panel-meta">IBM watsonx Orchestrate · au-syd</div>
+      </div>
+      <!-- watsonx Orchestrate mounts into #root -->
+      <div id="root"></div>
+    </div>
+
+  </div><!-- /.page -->
+
+  <footer>Made with IBM Bob</footer>
+
+  <!-- IBM watsonx Orchestrate embedded agent -->
+  <script>
+    window.wxOConfiguration = {
+      orchestrationID: "undefined",
+      hostURL: "https://au-syd.watson-orchestrate.cloud.ibm.com",
+      rootElementID: "root",
+      deploymentPlatform: "ibmcloud",
+      crn: "crn:v1:bluemix:public:watsonx-orchestrate:au-syd:a/bd3fb8812a1140ffa05551b5c0f55b86:e86e8a48-5b98-44a3-b417-c15f952de5a6::",
+      chatOptions: {
+          agentId: "570dcd0e-14a2-4746-b906-33040e6db4e3",
+      }
+    };
+    setTimeout(function () {
+      const script = document.createElement('script');
+      script.src = `${window.wxOConfiguration.hostURL}/wxochat/wxoLoader.js?embed=true`;
+      script.addEventListener('load', function () {
+          wxoLoader.init();
+      });
+      document.head.appendChild(script);
+    }, 0);
+  </script>
+
+</body>
+</html>
