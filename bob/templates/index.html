@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Visualization Dashboard Agent — IBM watsonx</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"/>
+</head>
+<body>
+
+  <!-- ══ NAV ══ -->
+  <nav>
+    <div class="nav-left">
+      <div class="nav-logo">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <rect x="2" y="2" width="6" height="6" rx="1.5" fill="#fff"/>
+          <rect x="10" y="2" width="6" height="6" rx="1.5" fill="rgba(255,255,255,0.5)"/>
+          <rect x="2" y="10" width="6" height="6" rx="1.5" fill="rgba(255,255,255,0.5)"/>
+          <rect x="10" y="10" width="6" height="6" rx="1.5" fill="rgba(255,255,255,0.75)"/>
+        </svg>
+      </div>
+      <div class="nav-title">Visualization Dashboard <span>/ IBM watsonx Orchestrate</span></div>
+      <div class="sep"></div>
+      <div class="nav-sub">Analytics &amp; AI Agent</div>
+    </div>
+    <div class="nav-right">
+      <span class="badge b-green">● Live</span>
+      <span class="badge b-teal">au-syd</span>
+      <span class="badge b-blue">AI Assistant</span>
+    </div>
+  </nav>
+
+  <!-- ══ SPLIT ══ -->
+  <div class="split">
+
+    <!-- ════ LEFT: DASHBOARD ════ -->
+    <div class="dash">
+
+      <!-- Hero -->
+      <div class="hero">
+        <div class="hero-text">
+          <div class="hero-eye">Powered by IBM watsonx Orchestrate</div>
+          <h1>Visualization Dashboard Agent</h1>
+          <p>Explore KPIs, charts &amp; trends. Use the AI agent on the right to query, explain, or drill into any metric.</p>
+        </div>
+        <div class="hero-stats">
+          <div class="hstat">
+            <div class="hstat-val">98.4%</div>
+            <div class="hstat-lbl">Uptime</div>
+          </div>
+          <div class="hstat">
+            <div class="hstat-val">12ms</div>
+            <div class="hstat-lbl">Response</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPIs -->
+      <div class="kpi-row">
+        <div class="kpi">
+          <div class="kpi-top">
+            <span class="kpi-lbl">Total Revenue</span>
+            <div class="kpi-ico" style="background:var(--accent-lt)">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M7 1v12M9.5 3.5H5.5a2 2 0 0 0 0 4h3a2 2 0 0 1 0 4H4.5" stroke="#0f62fe" stroke-width="1.4" stroke-linecap="round"/>
+              </svg>
+            </div>
+          </div>
+          <div class="kpi-val">$4.82M</div>
+          <div class="kpi-delta up">▲ 12.4% vs Q1</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-top">
+            <span class="kpi-lbl">Active Users</span>
+            <div class="kpi-ico" style="background:var(--green-lt)">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <circle cx="7" cy="4.5" r="2.5" stroke="#24a148" stroke-width="1.4"/>
+                <path d="M1.5 12.5c0-3.038 2.462-5.5 5.5-5.5s5.5 2.462 5.5 5.5" stroke="#24a148" stroke-width="1.4" stroke-linecap="round"/>
+              </svg>
+            </div>
+          </div>
+          <div class="kpi-val">24,310</div>
+          <div class="kpi-delta up">▲ 8.1% vs last month</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-top">
+            <span class="kpi-lbl">Conversion</span>
+            <div class="kpi-ico" style="background:var(--purple-lt)">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M1.5 10.5 5 6.5l3 3.5 2-3 2.5 3" stroke="#6929c4" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+          <div class="kpi-val">3.67%</div>
+          <div class="kpi-delta down">▼ 0.3% vs last month</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-top">
+            <span class="kpi-lbl">Avg. Session</span>
+            <div class="kpi-ico" style="background:var(--orange-lt)">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <circle cx="7" cy="7" r="5.5" stroke="#d14009" stroke-width="1.4"/>
+                <path d="M7 4.5V7.5l1.8 1.8" stroke="#d14009" stroke-width="1.4" stroke-linecap="round"/>
+              </svg>
+            </div>
+          </div>
+          <div class="kpi-val">4m 38s</div>
+          <div class="kpi-delta neu">── No change</div>
+        </div>
+      </div>
+
+      <!-- Charts grid -->
+      <div class="grid2">
+
+        <!-- Bar chart -->
+        <div class="panel full">
+          <div class="ph">
+            <span class="pt">Monthly Revenue by Region</span>
+            <span class="ptag b-blue">Q2 2025</span>
+          </div>
+          <div class="bars">
+            <div class="bar-row"><span class="bar-lbl">Asia Pacific</span><div class="bar-track"><div class="bar-fill" style="width:82%;background:#0f62fe">$1.94M</div></div></div>
+            <div class="bar-row"><span class="bar-lbl">North America</span><div class="bar-track"><div class="bar-fill" style="width:71%;background:#6929c4">$1.68M</div></div></div>
+            <div class="bar-row"><span class="bar-lbl">Europe</span><div class="bar-track"><div class="bar-fill" style="width:56%;background:#009d9a">$1.32M</div></div></div>
+            <div class="bar-row"><span class="bar-lbl">Middle East</span><div class="bar-track"><div class="bar-fill" style="width:38%;background:#d14009">$0.89M</div></div></div>
+            <div class="bar-row"><span class="bar-lbl">Africa</span><div class="bar-track"><div class="bar-fill" style="width:21%;background:#b28600">$0.49M</div></div></div>
+          </div>
+        </div>
+
+        <!-- Donut -->
+        <div class="panel">
+          <div class="ph">
+            <span class="pt">Traffic Sources</span>
+            <span class="pm">This month</span>
+          </div>
+          <div class="donut-wrap">
+            <svg width="96" height="96" viewBox="0 0 100 100" style="flex-shrink:0">
+              <circle cx="50" cy="50" r="35" fill="none" stroke="#e2e5ea" stroke-width="16"/>
+              <circle cx="50" cy="50" r="35" fill="none" stroke="#0f62fe" stroke-width="16" stroke-dasharray="83.6 136.3" stroke-dashoffset="0" transform="rotate(-90 50 50)"/>
+              <circle cx="50" cy="50" r="35" fill="none" stroke="#6929c4" stroke-width="16" stroke-dasharray="59.4 160.5" stroke-dashoffset="-83.6" transform="rotate(-90 50 50)"/>
+              <circle cx="50" cy="50" r="35" fill="none" stroke="#009d9a" stroke-width="16" stroke-dasharray="44.0 175.9" stroke-dashoffset="-143.0" transform="rotate(-90 50 50)"/>
+              <circle cx="50" cy="50" r="35" fill="none" stroke="#d14009" stroke-width="16" stroke-dasharray="33.0 186.9" stroke-dashoffset="-187.0" transform="rotate(-90 50 50)"/>
+              <text x="50" y="47" text-anchor="middle" font-size="10" font-weight="700" fill="#0f1117">Total</text>
+              <text x="50" y="59" text-anchor="middle" font-size="9" fill="#5a6174">Sources</text>
+            </svg>
+            <div class="donut-legend">
+              <div class="leg-item"><div class="leg-dot" style="background:#0f62fe"></div>Organic<span class="leg-pct">38%</span></div>
+              <div class="leg-item"><div class="leg-dot" style="background:#6929c4"></div>Paid<span class="leg-pct">27%</span></div>
+              <div class="leg-item"><div class="leg-dot" style="background:#009d9a"></div>Referral<span class="leg-pct">20%</span></div>
+              <div class="leg-item"><div class="leg-dot" style="background:#d14009"></div>Direct<span class="leg-pct">15%</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sparkline -->
+        <div class="panel">
+          <div class="ph">
+            <span class="pt">User Growth — 2024</span>
+            <span class="pm">Jan–Dec</span>
+          </div>
+          <div class="spark-wrap">
+            <svg width="100%" height="80" viewBox="0 0 600 80" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="sg" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#0f62fe" stop-opacity="0.2"/>
+                  <stop offset="100%" stop-color="#0f62fe" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <path d="M0 70 L50 65 L100 58 L150 53 L200 46 L250 42 L300 36 L350 30 L400 24 L450 18 L500 13 L550 8 L600 4 L600 80 L0 80 Z" fill="url(#sg)"/>
+              <path d="M0 70 L50 65 L100 58 L150 53 L200 46 L250 42 L300 36 L350 30 L400 24 L450 18 L500 13 L550 8 L600 4" fill="none" stroke="#0f62fe" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+              <circle cx="600" cy="4" r="4" fill="#0f62fe"/>
+            </svg>
+            <div class="spark-months">
+              <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span>
+              <span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Top Products -->
+        <div class="panel">
+          <div class="ph">
+            <span class="pt">Top Products</span>
+            <span class="pm">By revenue</span>
+          </div>
+          <table class="dtbl">
+            <thead><tr><th>Product</th><th>Revenue</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Analytics Pro</td><td>$1.24M</td><td><span class="tbadge" style="background:var(--green-lt);color:var(--green)">Growing</span></td></tr>
+              <tr><td>DataStream</td><td>$980K</td><td><span class="tbadge" style="background:var(--accent-lt);color:var(--accent)">Stable</span></td></tr>
+              <tr><td>Insight AI</td><td>$762K</td><td><span class="tbadge" style="background:var(--green-lt);color:var(--green)">Growing</span></td></tr>
+              <tr><td>ReportGen</td><td>$540K</td><td><span class="tbadge" style="background:var(--yellow-lt);color:var(--yellow)">Flat</span></td></tr>
+              <tr><td>PipelineX</td><td>$318K</td><td><span class="tbadge" style="background:var(--orange-lt);color:var(--orange)">Declining</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Activity Feed -->
+        <div class="panel">
+          <div class="ph">
+            <span class="pt">Recent Activity</span>
+            <span class="pm">Last 24 hrs</span>
+          </div>
+          <div class="feed">
+            <div class="feed-item"><div class="fdot" style="background:var(--green)"></div><div><div class="ftitle">New dataset ingested — Sales Q2</div><div class="fsub">2 min ago · Automated pipeline</div></div></div>
+            <div class="feed-item"><div class="fdot" style="background:var(--accent)"></div><div><div class="ftitle">AI agent queried revenue forecast</div><div class="fsub">18 min ago · watsonx Orchestrate</div></div></div>
+            <div class="feed-item"><div class="fdot" style="background:var(--purple)"></div><div><div class="ftitle">Report exported — APAC Summary</div><div class="fsub">1 hr ago · j.smith@corp.com</div></div></div>
+            <div class="feed-item"><div class="fdot" style="background:var(--yellow)"></div><div><div class="ftitle">Anomaly detected — Traffic spike</div><div class="fsub">3 hrs ago · Monitoring alert</div></div></div>
+            <div class="feed-item"><div class="fdot" style="background:var(--teal)"></div><div><div class="ftitle">Dashboard refresh scheduled</div><div class="fsub">6 hrs ago · Cron job</div></div></div>
+          </div>
+        </div>
+
+        <!-- Quarterly vs Target -->
+        <div class="panel full">
+          <div class="ph">
+            <span class="pt">Quarterly Performance vs Target</span>
+            <span class="ptag b-teal">2024–2025</span>
+          </div>
+          <div class="bars">
+            <div class="bar-row"><span class="bar-lbl">Q1 2024</span><div class="bar-track"><div class="bar-fill" style="width:65%;background:#009d9a">$3.2M / Target $4.0M</div></div></div>
+            <div class="bar-row"><span class="bar-lbl">Q2 2024</span><div class="bar-track"><div class="bar-fill" style="width:78%;background:#009d9a">$3.9M / Target $4.5M</div></div></div>
+            <div class="bar-row"><span class="bar-lbl">Q3 2024</span><div class="bar-track"><div class="bar-fill" style="width:92%;background:#24a148">$4.6M / Target $4.8M</div></div></div>
+            <div class="bar-row"><span class="bar-lbl">Q4 2024</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:#24a148">$5.1M / Target $5.0M ✓</div></div></div>
+            <div class="bar-row"><span class="bar-lbl">Q1 2025</span><div class="bar-track"><div class="bar-fill" style="width:88%;background:#0f62fe">$4.4M / Target $4.8M</div></div></div>
+          </div>
+        </div>
+
+      </div><!-- /.grid2 -->
+
+      <!-- Chips -->
+      <div class="chips-bar">
+        <span class="chips-lbl">Ask the agent</span>
+        <span class="chip">Summarise revenue this quarter</span>
+        <span class="chip">Which region is underperforming?</span>
+        <span class="chip">Forecast next month's users</span>
+        <span class="chip">Explain the traffic anomaly</span>
+        <span class="chip">Top 3 growth opportunities</span>
+        <span class="chip">Compare Q1 vs Q2 conversion</span>
+      </div>
+
+    </div><!-- /.dash -->
+
+    <!-- ════ RIGHT: AI AGENT ════ -->
+    <div class="agent-pane">
+      <div class="agent-header">
+        <div class="agent-header-left">
+          <div class="agent-live"></div>
+          <div>
+            <div class="agent-title">Visualization Dashboard Agent</div>
+            <div class="agent-sub">IBM watsonx Orchestrate · au-syd · Ready</div>
+          </div>
+        </div>
+        <span class="agent-badge">AI Assistant</span>
+      </div>
+      <!-- watsonx Orchestrate mounts here -->
+      <div id="root"></div>
+    </div>
+
+  </div><!-- /.split -->
+
+  <footer>Made with IBM Bob</footer>
+
+  <!-- IBM watsonx Orchestrate embedded agent — injected from Flask config -->
+  <script>
+    window.wxOConfiguration = {
+      orchestrationID: "{{ config.orchestration_id }}",
+      hostURL: "{{ config.host_url }}",
+      rootElementID: "root",
+      deploymentPlatform: "{{ config.deployment }}",
+      crn: "{{ config.crn }}",
+      chatOptions: {
+          agentId: "{{ config.agent_id }}", 
+      }
+    };
+    setTimeout(function () {
+      const script = document.createElement('script');
+      script.src = `${window.wxOConfiguration.hostURL}/wxochat/wxoLoader.js?embed=true`;
+      script.addEventListener('load', function () {
+          wxoLoader.init();
+      });
+      document.head.appendChild(script);
+    }, 0);
+  </script>
+
+</body>
+</html>
